@@ -1,50 +1,149 @@
-elgamal
-=======
+# Adjusted ElGamal for Files  
+### Cryptographic Implementation Analysis & Experimental Framework
 
-Overview: elgamal is a python module that lets you encrypt and decrypt text using the ElGamal Cryptosystem.
+This repository contains an enhanced implementation of the **ElGamal public-key cryptosystem**, specifically redesigned to support **efficient file encryption, decryption, and large prime generation**.  
+It provides a modular framework for evaluating different primality-testing algorithms, optimized key generation, file chunking, and multithreading techniques.
 
-Intended Use:
-This program was created as an exercise in cryptography in one of my classes at the University of Kentucky.
-I later turned it into a module.  I do not recommend you use it to protect any sensitive information.
+---
 
-Using elgamal:
-Install elgamal by downloading elgamal.py and placing it in your module search path.
+## 🚀 Introduction
 
-If you don't know your module search path, fire up a python console and run
+Classical ElGamal suffers from limitations such as:
 
-	import sys
-	sys.path
+- Slow key generation  
+- Inefficient ciphertext expansion  
+- Inability to encrypt large files directly  
+- Slow encryption/decryption for large data  
 
-To use do
+This project implements **Adjusted ElGamal**, improving both **security** and **performance** through:
 
-	import elgamal
+- Fast large-prime generation (Miller–Rabin, AKS, Solovay–Strassen)
+- Extended Euclidean Algorithm for faster key generation  
+- File block processing (chunk-based encryption)
+- Multithreading to accelerate computation  
+- Preprocessing optimizations using `ByteArrayIO` and `StringIO`
 
-To generate a public/private key pair do
+This framework allows researchers to compare performance across multiple configurations.
 
-	elgamal.generate_keys()
-	#returns a dictionary {'privateKey': privateKeyObject, 'publicKey': publicKeyObject}
-	
-By default generate_keys() generates a key of 256 bits with probability 0.9999999997671694
-(1-(2^-32)) that your key is prime.  You can alter the bitness of your keys and the certainty
-that your key is prime by passing arguments n and t like this.
+---
 
-	elgamal.generate_keys(n, t)
-	
-where n is the number of bits you want your key to have and t means the probability that the
-key is prime is 1-(2^-t).
-	
-To encrypt a message do
+## 📦 Installation Requirements
 
-	cipher = elgamal.encrypt(publicKey, "This is the message I want to encrypt")
-	#returns a string
-	
-To decrypt the cipher text do
+Before running the program, ensure your Python environment includes the following packages (all are standard libraries except DebugTimer):
 
-	plaintext = elgamal.decrypt(privateKey, cipher)
-	#returns the message passed to elgamal.encrypt()
+```
+math
+random
+time
+logging
+sys
+pickle
+hashlib
+functools
+queue
+io
+threading
+DebugTimer # custom / external helper (included in project if provided)
+```
 
-Compatibility: Python 3.4.  Does not work in python 2.7!
+No additional third-party dependencies are required.
 
-License: MIT
+---
 
-Like this module?  Tell me what you like about it here https://goo.gl/forms/nA8gBcjPiwAoWzg32
+## ▶️ How to Run
+
+Run the full experimental pipeline:
+
+```
+python3 testAll.py
+```
+
+This will:
+
+- Generate large primes using three different algorithms
+
+- Run Adjusted ElGamal encryption & decryption
+
+- Compare single-thread vs multithread performance
+
+- Show the processed-data optimization results
+
+## 📁 Project Structure & File Explanation
+
+---
+
+### **🔢 Part 1 — Large Prime Generation**
+
+| Algorithm              | File                         |
+|------------------------|------------------------------|
+| Miller–Rabin           | `Large_Prime_Generation.py`  |
+| AKS primality test     | `AKS_algorithm.py`           |
+| Solovay–Strassen test  | `solovay_strassen.py`        |
+
+These modules allow consistent comparison of prime length, performance, and accuracy.
+
+---
+
+### **🔐 Part 2 — Adjusted ElGamal Encryption & Decryption**
+
+| Component                        | Description                           | File                |
+|----------------------------------|---------------------------------------|---------------------|
+| Original ElGamal + Large Prime  | Baseline implementation               | `OurMethod.py`      |
+| File Encryption (single thread) | Supports `.txt` and images            | `File_encryption.py` |
+| File Encryption (multithreading)| Enhanced speed, `.txt` only           | `improved_plus.py`  |
+
+Enhancements include:
+
+- **Chunk-based processing**  
+- **Fast modular inverse using Extended Euclid**  
+- **Multithreaded block-level encryption**  
+- **Data preprocessing (ByteArrayIO / StringIO) to minimize conversion cost**
+
+---
+
+### **🧪 Test Suite**
+
+| File         | Description                                           |
+|--------------|-------------------------------------------------------|
+| `testAll.py` | Runs all examples, experiments, and comparisons       |
+
+This is the recommended entry point.
+
+---
+
+## 📊 Experimental Summary
+
+Based on our implementation:
+
+---
+
+### **🔢 Large Prime Generation Performance**
+
+| Algorithm         | Performance                                   |
+|------------------|------------------------------------------------|
+| Miller–Rabin      | Fastest (≈309-digit prime in ~0.15s)          |
+| AKS              | Deterministic but slower                       |
+| Solovay–Strassen | Correct but extremely slow for large primes    |
+
+---
+
+### **⚡ Adjusted ElGamal Performance**
+
+Multithreading + data preprocessing significantly accelerates both encryption and decryption:
+
+| Method                        | Encryption Time | Decryption Time |
+|-------------------------------|-----------------|-----------------|
+| Single-threaded               | ~10.5s          | ~8.0s           |
+| Multithreaded + Preprocessing | ~5.7s           | ~5.8s           |
+
+---
+
+## 🧩 Techniques Used
+
+- Modular arithmetic & primality testing  
+- Public-key cryptography  
+- Multithreaded task queues  
+- Python byte-stream optimization  
+- Performance benchmarking
+
+
